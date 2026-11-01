@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2f1ed" />
+    <meta name="description" content="A context-aware work session planner for your next clear step." />
+    <title>Circadian OS — Find your next clear step</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Circadian OS home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>CIRCADIAN<span class="brand-light"> OS</span></span></a>
+        <div class="top-meta"><span class="live-dot"></span><span>LOCAL SESSION</span><span class="meta-divider"></span><span>SUNDAY · LONDON</span></div>
+        <button class="quiet-button" id="resetButton" type="button">Reset <span aria-hidden="true">↺</span></button>
+      </header>
+
+      <section class="intro">
+        <div>
+          <p class="eyebrow">YOUR WORK, IN RHYTHM <span class="eyebrow-line"></span></p>
+          <h1>Find your next<br /><em>clear step.</em></h1>
+          <p class="intro-copy">Context shifts. Your plan can shift with it. Tune your signals and mutate the work state.</p>
+        </div>
+        <div class="deadline-card"><span class="deadline-icon" aria-hidden="true">◷</span><div><span class="micro-label">TODAY'S WINDOW</span><strong>Submission · 17:00</strong></div><span class="deadline-arrow" aria-hidden="true">↗</span></div>
+      </section>
+
+      <section class="dashboard" aria-label="Circadian OS adaptive work session">
+        <div class="context-column">
+          <div class="card context-card">
+            <div class="card-heading"><div><span class="section-index">01</span><h2>Live telemetry</h2></div><span class="editable-tag judge-tag"><span aria-hidden="true">✦</span> JUDGE GOD-MODE</span></div>
+            <label class="field-label" for="task">Active engineering task</label>
+            <textarea id="task" rows="2" maxlength="400">Fix the flaky auth refresh flow and ship a regression test before the demo.</textarea>
+            <p class="field-caption">Synthetic task for the demo. Nothing is saved between sessions.</p>
+
+            <div class="signal-block">
+              <div class="signal-title"><div><label class="field-label" for="energy">HRV / Energy</label><span class="signal-caption">Self-report proxy · not wearable-linked</span></div><output id="energyValue" for="energy">72%</output></div>
+              <input id="energy" class="range energy-range" type="range" min="0" max="100" value="72" />
+              <div class="range-ends"><span>Low reserve</span><span>High reserve</span></div>
+            </div>
+
+            <div class="signal-block noise-block">
+              <div class="signal-title"><div><label class="field-label" for="noise">Ambient mic · WebAudio</label><span class="signal-caption">Relative level · dBFS, uncalibrated</span></div><output id="noiseValue" for="noise">−42 dBFS</output></div>
+              <input id="noise" class="range noise-range" type="range" min="-60" max="-5" value="-42" />
+              <div class="range-ends"><span>Quiet</span><span>Busy</span></div>
+              <div class="mic-row"><button class="mic-button" id="micButton" type="button"><span class="mic-icon" aria-hidden="true">◉</span><span id="micLabel">Start live mic</span></button><span class="mic-note">manual override always available</span></div>
+              <p class="privacy-note"><span aria-hidden="true">◈</span> Mic permission is optional. Audio is analysed on-device; never recorded or sent.</p>
+            </div>
+
+            <div class="signal-block">
+              <div class="signal-title"><div><label class="field-label" for="fatigue">Typing fatigue</label><span class="signal-caption">Backspace / pause proxy · judge-adjustable</span></div><output id="fatigueValue" for="fatigue">18%</output></div>
+              <input id="fatigue" class="range fatigue-range" type="range" min="0" max="100" value="18" />
+              <div class="range-ends"><span>Fluid</span><span>Fatigued</span></div>
+            </div>
+
+            <div class="signal-block location-block">
+              <div class="signal-title"><div><label class="field-label" for="location">Location mode</label><span class="signal-caption">One tap changes the actuation preview</span></div></div>
+              <select id="location" class="select-control">
+                <option value="quiet_desk" selected>Quiet Desk</option>
+                <option value="noisy_cafe">Noisy Cafe</option>
+                <option value="in_transit">In Transit w/ AirPods</option>
+              </select>
+            </div>
+
+            <div class="signal-block deadline-block">
+              <div class="signal-title"><label class="field-label" for="deadline">Deadline in</label><span class="signal-caption">Reshapes the schedule</span></div>
+              <select id="deadline" class="select-control">
+                <option value="15">15 minutes</option><option value="30">30 minutes</option><option value="45" selected>45 minutes</option><option value="60">1 hour</option><option value="120">2 hours</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="score-card" aria-live="polite">
+            <div class="score-topline"><span class="score-title">COGNITIVE BATTERY</span><span class="score-info" title="A planning heuristic based on your check-in, relative noise, typing fatigue, location and deadline. Not a health measurement.">i</span><span class="score-status" id="scoreStatus">READY TO MUTATE</span></div>
+            <div class="score-main"><div class="score-ring" id="scoreRing"><span id="batteryValue">72</span><small>/100</small></div><div class="score-copy"><strong id="scoreHeadline">Protect your focus.</strong><p id="scoreSubline">Current context supports a focused block.</p></div></div>
+            <div class="score-foot"><span><i class="mini-dot energy-dot"></i>Energy <b id="scoreEnergy">72%</b></span><span><i class="mini-dot noise-dot"></i>Noise <b id="scoreNoise">30%</b></span><span><i class="mini-dot fatigue-dot"></i>Typing <b id="scoreFatigue">18%</b></span></div>
+          </div>
+          <button id="mutateButton" class="primary-button mutate-button" type="button"><span>Mutate State</span><span class="button-arrow">↗</span></button>
+          <p class="mutate-caption">One loop · Re-score · Re-plan · Re-act</p>
+        </div>
+
+        <div class="plan-column">
+          <div class="plan-card card">
+            <div class="card-heading plan-heading"><div><span class="section-index">02</span><h2>Adaptive work plan</h2></div><span id="sourceBadge" class="source-badge"><span class="source-dot"></span> READY</span></div>
+            <div class="context-shift" id="transitionSummary">Set your telemetry, then mutate state to see how the system responds.</div>
+            <div id="loadingPlan" class="loading-plan" hidden aria-live="polite"><span class="loader"></span><p>Scoring signals · slicing the next step · reshuffling…</p></div>
+            <div id="planResult" class="plan-result" hidden aria-live="polite">
+              <div class="plan-summary"><div><span class="micro-label">RECOMMENDED MODE</span><h3 id="planMode">Micro-sprint</h3></div><span id="focusDuration" class="duration-pill">12 MIN</span></div>
+              <p id="planNudge" class="plan-nudge"></p>
+              <ol id="stepsList" class="steps-list"></ol>
+            </div>
+            <div id="errorMessage" class="error-message" hidden role="alert"></div>
+          </div>
+
+          <div class="shadow-card" id="shadowCard"><span class="shadow-icon" aria-hidden="true">✳</span><div><div class="shadow-head"><strong id="shadowStatus">Shadow Worker standing by</strong><span class="sim-tag">SIMULATED</span></div><p id="shadowNote">Low-energy coding tasks can be staged for background follow-up.</p></div></div>
+
+          <div class="schedule-card card">
+            <div class="panel-heading"><div><span class="section-index">03</span><h2>Reshuffled schedule</h2></div><span class="source-badge">NEXT 4 MOVES</span></div>
+            <ol id="scheduleList" class="schedule-list"><li class="schedule-placeholder">Your next moves will appear here.</li></ol>
+          </div>
+
+          <div class="actuation-card card">
+            <div class="panel-heading"><div><span class="section-index">04</span><h2>Apple ecosystem bridge</h2></div><span class="source-badge"><span class="source-dot"></span> SHORTCUTS PREVIEW</span></div>
+            <div class="actuation-strip"><span><i class="device-dot airpods"></i><b>AirPods</b><small id="airpodsState">OFF</small></span><span><i class="device-dot watch"></i><b>Watch</b><small id="watchState">HAPTIC READY</small></span><span><i class="device-dot island"></i><b>Dynamic Island</b><small id="islandState">STANDBY</small></span></div>
+            <div class="json-heading"><span>LIVE WEBHOOK PAYLOAD</span><button id="copyPayload" class="copy-button" type="button">Copy JSON</button></div>
+            <pre id="payloadJson" class="payload-json">{
+  "event": "circadian.state_mutated",
+  "delivery": "awaiting_first_mutation"
+}</pre>
+            <p class="preview-note">Preview only. No device is paired and no webhook is sent.</p>
+            <div class="briefing-player" id="briefingPlayer"><button id="briefingButton" class="play-button" type="button" disabled aria-label="Play context briefing"><span id="playIcon">▶</span></button><div class="briefing-copy"><strong>Context briefing</strong><span id="briefingStatus">Run Mutate State to prepare audio</span></div><span class="audio-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="ai-voice-tag">BROWSER VOICE</span></div>
+          </div>
+
+          <div class="codex-note"><span class="codex-mark" aria-hidden="true">⌘</span><p><strong>Built with Codex</strong><span>Multi-signal state machine · verified Structured Outputs · local fallback.</span></p><span class="note-spark" aria-hidden="true">✦</span></div>
+        </div>
+      </section>
+      <footer class="footer"><span>EARLY BUILD · MADE FOR THE MOMENT YOU'RE IN</span><span>LOCAL FIRST <i>✳</i></span></footer>
+    </main>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
