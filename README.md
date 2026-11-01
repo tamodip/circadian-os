@@ -19,18 +19,17 @@ uvicorn app:app --reload
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Without an API key, the deterministic planner runs immediately. With a key, the app uses the OpenAI Python SDK and the Responses API. `OPENAI_MODEL` can override the default `gpt-6-astra`. If the API is unavailable or returns an incomplete plan, the local deterministic plan is used so the demo can continue.
 
-## Demo clip
+## Demo video
 
-[View the 48-second illustrated walkthrough](demo-walkthrough.gif). It uses synthetic values and stylized UI panels; it is a silent animation, not a live screen recording.
+[Watch the 51-second live product demo (MP4)](https://raw.githubusercontent.com/tamodip/circadian-os/main/demo-video.mp4). It records the running app with synthetic telemetry and the supplied demo task. The capture is silent; in the app, **Context briefing** speaks through browser SpeechSynthesis after the user presses Play.
 
-## The 90-second demo
+## Demo flow
 
-1. **0–10s:** Start with the seeded, synthetic engineering task and show the live Cognitive Battery.
-2. **10–25s:** Drag **HRV / Energy** down to about 20%, **Typing fatigue** up to 75%, and **Ambient mic** to around −17 dBFS. Choose **Noisy Cafe** (or **In Transit w/ AirPods**). The score updates locally as the signals change.
-3. **25–48s:** Click **Mutate State**. The app recalculates the score, requests an exactly three-step plan (or returns the instant deterministic equivalent), marks the **Shadow Worker PR drafted** preview, and reshuffles the schedule.
-4. **48–68s:** Show the Apple Shortcuts JSON preview: AirPods Noise Cancellation for Noisy Cafe, a Watch tap on low capacity, and a recovery prompt for Dynamic Island. Click **Copy JSON** if useful.
-5. **68–84s:** Play **Context briefing** to hear the transition and first step through the browser's speech synthesis.
-6. **84–90s:** Close on the three micro-steps and the single-loop flow.
+1. Start with the seeded, synthetic engineering task and the live Cognitive Battery.
+2. Lower **HRV / Energy**, raise **Typing fatigue** and ambient noise, and choose **Noisy Cafe**. The score updates as the signals change.
+3. Click **Mutate State**. The app recalculates the score, requests an exactly three-step plan (or returns the instant deterministic equivalent), shows the **Shadow Worker PR drafted** preview, and reshuffles the schedule.
+4. Show the Apple Shortcuts JSON preview: AirPods Noise Cancellation for Noisy Cafe, a Watch tap on low capacity, and a recovery prompt for Dynamic Island.
+5. Play **Context briefing** to hear the transition and first step through browser speech synthesis.
 
 The interface and local fallback do not need a key, account, mic permission, or paired Apple device. For the live microphone, press **Start live mic** and grant browser permission; the manual noise slider remains usable if permission is declined.
 
@@ -80,9 +79,9 @@ The tests cover the local fallback, low-energy transition, three-step plan, sche
 ## Hackathon submission checklist
 
 - [x] Published as a public repository: [github.com/tamodip/circadian-os](https://github.com/tamodip/circadian-os).
-- [ ] Record the synthetic-task journey above in a video no longer than 90 seconds; add the video link here or to the submission.
+- [x] Add the 51-second MP4 product demo; the public link above does not require sign-in.
 - [x] Keep `.env`, API keys and personal task text out of the repository; use the supplied synthetic task in the recording.
-- [ ] Confirm the repository and final video links from a signed-out browser.
+- [ ] Add the public video URL to the hackathon submission form.
 
 ## Scope for the next build
 

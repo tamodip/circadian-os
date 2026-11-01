@@ -1,4 +1,13 @@
 const $ = (id) => document.getElementById(id);
+function setVisibility(id, visible) {
+  const element = $(id);
+  element.hidden = !visible;
+  if (visible) element.style.removeProperty('display');
+  else element.style.display = 'none';
+}
+setVisibility('loadingPlan', false);
+setVisibility('planResult', false);
+setVisibility('errorMessage', false);
 const energy = $('energy');
 const noise = $('noise');
 const fatigue = $('fatigue');
@@ -131,9 +140,9 @@ async function mutateState() {
     previous_battery: prior.battery,
     previous_location: prior.location_mode,
   };
-  $('errorMessage').hidden = true;
-  $('planResult').hidden = true;
-  $('loadingPlan').hidden = false;
+  setVisibility('errorMessage', false);
+  setVisibility('planResult', false);
+  setVisibility('loadingPlan', true);
   $('mutateButton').disabled = true;
   $('sourceBadge').className = 'source-badge';
   $('sourceBadge').innerHTML = '<span class="source-dot"></span> MUTATING';
@@ -156,8 +165,8 @@ async function mutateState() {
     $('shadowStatus').textContent = payload.shadow_worker.status;
     $('shadowNote').textContent = payload.shadow_worker.note;
     $('shadowCard').classList.toggle('queued', payload.low_capacity);
-    $('loadingPlan').hidden = true;
-    $('planResult').hidden = false;
+    setVisibility('loadingPlan', false);
+    setVisibility('planResult', true);
     $('sourceBadge').className = `source-badge ${payload.source === 'openai' ? 'live' : 'demo'}`;
     $('sourceBadge').innerHTML = `<span class="source-dot"></span> ${payload.source === 'openai' ? 'OPENAI STRUCTURED OUTPUT' : 'DETERMINISTIC FALLBACK'}`;
     latestBriefing = `${payload.transition_summary} ${payload.shadow_worker.status}. Your first step is ${payload.plan.steps[0].title}.`;
@@ -168,7 +177,7 @@ async function mutateState() {
     $('batteryValue').textContent = payload.battery;
     $('scoreRing').style.background = `conic-gradient(#cbdc91 0 ${payload.battery}%,#47614f ${payload.battery}% 100%)`;
   } catch (error) {
-    $('loadingPlan').hidden = true;
+    setVisibility('loadingPlan', false);
     showError(`${error.message} Without OPENAI_API_KEY the deterministic fallback should still run; check the local server.`);
     $('sourceBadge').className = 'source-badge';
     $('sourceBadge').innerHTML = '<span class="source-dot"></span> READY';
@@ -179,7 +188,7 @@ async function mutateState() {
 
 function showError(message) {
   $('errorMessage').textContent = message;
-  $('errorMessage').hidden = false;
+  setVisibility('errorMessage', true);
 }
 
 async function toggleMic() {
@@ -267,9 +276,9 @@ function resetSession() {
   locationControl.value = 'quiet_desk';
   deadline.value = '45';
   $('task').value = 'Fix the flaky auth refresh flow and ship a regression test before the demo.';
-  $('planResult').hidden = true;
-  $('loadingPlan').hidden = true;
-  $('errorMessage').hidden = true;
+  setVisibility('planResult', false);
+  setVisibility('loadingPlan', false);
+  setVisibility('errorMessage', false);
   $('sourceBadge').className = 'source-badge';
   $('sourceBadge').innerHTML = '<span class="source-dot"></span> READY';
   $('transitionSummary').textContent = 'Set your telemetry, then mutate state to see how the system responds.';
