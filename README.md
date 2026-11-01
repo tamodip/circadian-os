@@ -19,6 +19,10 @@ uvicorn app:app --reload
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Without an API key, the deterministic planner runs immediately. With a key, the app uses the OpenAI Python SDK and the Responses API. `OPENAI_MODEL` can override the default `gpt-6-astra`. If the API is unavailable or returns an incomplete plan, the local deterministic plan is used so the demo can continue.
 
+## Demo clip
+
+[View the 48-second illustrated walkthrough](demo-walkthrough.gif). It uses synthetic values and stylized UI panels; it is a silent animation, not a live screen recording.
+
 ## The 90-second demo
 
 1. **0–10s:** Start with the seeded, synthetic engineering task and show the live Cognitive Battery.
