@@ -21,7 +21,7 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Without an API key, the det
 
 ## Demo video
 
-[Watch the 51-second live product demo (MP4)](https://raw.githubusercontent.com/tamodip/circadian-os/main/demo-video.mp4). It records the running app with synthetic telemetry and the supplied demo task. The capture is silent; in the app, **Context briefing** speaks through browser SpeechSynthesis after the user presses Play.
+[Watch the 87-second live product demo (MP4)](https://raw.githubusercontent.com/tamodip/circadian-os/main/demo-video.mp4). It records the running app with synthetic telemetry and the supplied demo task, including one live OpenAI call whose 12.7-second wait is trimmed and labelled on screen. Narration and the briefing audio in the video use macOS speech; in the app, **Context briefing** speaks through browser SpeechSynthesis after the user presses Play.
 
 ## Demo flow
 
@@ -79,7 +79,7 @@ The tests cover the local fallback, low-energy transition, three-step plan, sche
 ## Hackathon submission checklist
 
 - [x] Published as a public repository: [github.com/tamodip/circadian-os](https://github.com/tamodip/circadian-os).
-- [x] Add the 51-second MP4 product demo; the public link above does not require sign-in.
+- [x] Add the 87-second MP4 product demo; the public link above does not require sign-in.
 - [x] Keep `.env`, API keys and personal task text out of the repository; use the supplied synthetic task in the recording.
 - [ ] Add the public video URL to the hackathon submission form.
 
