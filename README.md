@@ -75,10 +75,10 @@ The tests cover the local fallback, low-energy transition, three-step plan, sche
 
 ## Hackathon submission checklist
 
-- [ ] Publish this project in a public GitHub repository and add its URL to the submission.
+- [x] Published as a public repository: [github.com/tamodip/circadian-os](https://github.com/tamodip/circadian-os).
 - [ ] Record the synthetic-task journey above in a video no longer than 90 seconds; add the video link here or to the submission.
-- [ ] Keep `.env`, API keys, personal task text and identifiable desktop/browser content out of the repo and recording.
-- [ ] Test the public repository and video links in a signed-out browser.
+- [x] Keep `.env`, API keys and personal task text out of the repository; use the supplied synthetic task in the recording.
+- [ ] Confirm the repository and final video links from a signed-out browser.
 
 ## Scope for the next build
 
